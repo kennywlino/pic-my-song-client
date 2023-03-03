@@ -1,3 +1,20 @@
+import axios from 'axios';
+
+const fileHandler = (e:Event) => {
+  e.preventDefault();
+  const imageInput = document.getElementById('image_upload');
+  const image = imageInput?.files[0];
+  const formData = new FormData();
+  formData.append('img', image);
+
+  axios.post(`${process.env.SERVER}/aws-rekognition/get-songs`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }).then(res => console.log(res))
+    .catch(error => console.error(error));
+}
+
 export default function FileUploadForm() {
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -7,7 +24,7 @@ export default function FileUploadForm() {
           <p className="mb-2 text-lg"><span className="font-semibold">Click to upload</span> or drag and drop</p>
           <p className="text-md">JPG or PNG files</p>
         </div>
-        <input type="file" id="image_upload" className="hidden"/>
+        <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e)}/>
       </label>
     </div>
   )
