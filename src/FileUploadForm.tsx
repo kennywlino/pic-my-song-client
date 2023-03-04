@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const SERVER = import.meta.env.VITE_SERVER;
+
 const fileHandler = (e:Event) => {
   e.preventDefault();
   const imageInput = document.getElementById('image_upload');
@@ -7,7 +9,7 @@ const fileHandler = (e:Event) => {
   const formData = new FormData();
   formData.append('img', image);
 
-  axios.post(`${process.env.SERVER}/aws-rekognition/get-songs`, formData, {
+  axios.post(`${SERVER}/aws-rekognition/get-songs`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
