@@ -2,22 +2,22 @@ import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-const fileHandler = (e:Event) => {
+const fileHandler = (e:Event, setData: Function) => {
   e.preventDefault();
   const imageInput = document.getElementById('image_upload');
   const image = imageInput?.files[0];
   const formData = new FormData();
   formData.append('img', image);
 
-  axios.post(`${SERVER}/aws-rekognition/get-songs`, formData, {
+  axios.post(`${SERVER}/get-songs`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
-  }).then(res => console.log(res))
+  }).then(res => setData(res))
     .catch(error => console.error(error));
 }
 
-export default function FileUploadForm() {
+export default function FileUploadForm(props: { setSongData: Function }) {
   return (
     <div className="min-h-screen flex justify-center items-center">
       <label htmlFor="image_upload" className="flex flex-col items-center justify-center h-96 w-4/5 px-4 border-2 border-dashed rounded-md border-gray-400 cursor-pointer bg-gray-700 hover:bg-gray-600">
@@ -26,7 +26,7 @@ export default function FileUploadForm() {
           <p className="mb-2 text-lg"><span className="font-semibold">Click to upload</span> or drag and drop</p>
           <p className="text-md">JPG or PNG files</p>
         </div>
-        <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e)}/>
+        <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e, props.setSongData)}/>
       </label>
     </div>
   )
