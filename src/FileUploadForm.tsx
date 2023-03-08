@@ -1,11 +1,26 @@
 import axios from 'axios';
+import { type } from 'os';
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-const fileHandler = (e:Event, setData: Function) => {
+const fileHandler = (e:Event, setSongData: Function, setImage: Function) => {
   e.preventDefault();
   const imageInput = document.getElementById('image_upload');
   const image = imageInput?.files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener(
+    "load",
+    () => {
+      const imageDataUrl = reader.result;
+      setImage(reader.result);
+    }
+  )
+
+  if (image) {
+    reader.readAsDataURL(image);
+  }
+
   const formData = new FormData();
   formData.append('img', image);
 
@@ -13,11 +28,11 @@ const fileHandler = (e:Event, setData: Function) => {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
-  }).then(res => setData(res))
+  }).then(res => setSongData(res))
     .catch(error => console.error(error));
 }
 
-export default function FileUploadForm(props: { setSongData: Function }) {
+export default function FileUploadForm(props: { setSongData: Function, setImage: Function }) {
   return (
     <div className="min-h-screen flex justify-center items-center">
       <label htmlFor="image_upload" className="flex flex-col items-center justify-center h-96 w-4/5 px-4 border-2 border-dashed rounded-md border-gray-400 cursor-pointer bg-gray-700 hover:bg-gray-600">
@@ -26,7 +41,7 @@ export default function FileUploadForm(props: { setSongData: Function }) {
           <p className="mb-2 text-lg"><span className="font-semibold">Click to upload</span> or drag and drop</p>
           <p className="text-md">JPG or PNG files</p>
         </div>
-        <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e, props.setSongData)}/>
+        <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e, props.setSongData, props.setImage)}/>
       </label>
     </div>
   )
