@@ -15,9 +15,9 @@ export default function Hero() {
             <button className="btn btn-accent">Try It Now!</button>
           </div>
         </div>
-        <div className="relative">
-          <Music fill="white" className="absolute top-0 left-0 -translate-y-1/2 h-80 w-80" />
-          <Photo fill="white" className="absolute top-0 left-0 h-80 w-80 -translate-y-1/2 bg-base-200 hover:opacity-0 transition-opacity" />
+        <div className="stack">
+          <Photo fill="white" className="h-80 w-80 bg-base-200 hover:opacity-0 transition-opacity" />
+          <Music fill="white" className="h-80 w-80 opacity-100" />
         </div>
       </div>
   </div>
