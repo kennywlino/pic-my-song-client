@@ -1,4 +1,5 @@
 import SongCard from "./SongCard";
+import capybara from '../assets/capybara.jpg'
 import exampleData from "../../spotify-songs-search-example.json";
 
 export default function Results(props: { songData : object, image: string }) {
@@ -37,7 +38,7 @@ export default function Results(props: { songData : object, image: string }) {
           </div> */}
 
           <div className="card">
-            <figure>{<img src="../assets/capybara.jpg" alt="test" className="h-96 rounded-lg outline outline-double outline-offset-4 outline-4 outline-primary hover:scale-110"/>}</figure>
+            <figure>{<img src={capybara} alt="test" className="h-96 rounded-lg outline outline-double outline-offset-4 outline-4 outline-primary hover:scale-110"/>}</figure>
           </div>
 
           <div className="flex flex-col gap-4">
