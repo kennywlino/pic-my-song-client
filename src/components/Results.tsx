@@ -28,10 +28,10 @@ export default function Results(props: { songData : object, image: string }) {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        <h1 className="text-5xl font-bold pb-16">Results</h1>
+      <div className="min-h-screen flex flex-col justify-center">
+        <h1 className="text-5xl font-bold pb-16 self-center">Results</h1>
 
-        <div className="flex justify-between items-center gap-8">
+        <div className="flex justify-around items-center">
 
 
           {/* <div className="card">
