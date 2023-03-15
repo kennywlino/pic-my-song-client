@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { type } from 'os';
+import { ChangeEvent } from 'react';
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-const fileHandler = (e:Event, setSongData: Function, setImage: Function) => {
+const fileHandler = (e: ChangeEvent<HTMLInputElement>, setSongData: Function, setImage: Function): void => {
   e.preventDefault();
-  const imageInput = document.getElementById('image_upload');
-  const image = imageInput?.files[0];
-  const reader = new FileReader();
+  if (e.target.files == null) {
+    throw new Error("No file found");
+  }
 
+  const image = e.target.files[0]
+
+  const reader = new FileReader();
   reader.addEventListener(
     "load",
     () => {
