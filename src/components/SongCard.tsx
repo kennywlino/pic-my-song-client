@@ -1,4 +1,4 @@
-export default function SongCard(props: { data : object }) {
+export default function SongCard(props: { data : any }) {
   const { data } = props;
 
   const artist = data.artists[0].name;
@@ -6,9 +6,6 @@ export default function SongCard(props: { data : object }) {
   const album = data.album.name;
   const albumArt = data.album.images[0].url;
   const previewUrl = data.preview_url;
-
-
-
 
   return (
     <div className="card card-side h-36 bg-base-100 shadow-xl">

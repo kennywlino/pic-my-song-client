@@ -4,27 +4,25 @@ import exampleData from "../../spotify-songs-search-example.json";
 export default function Results(props: { songData : object, image: string }) {
   const { songData, image } = props;
 
-  let songData0;
+  // let songData0;
 
-  let songDataExists = Object.keys(songData).length !== 0; 
-  let allTracks;
+  // let songDataExists = Object.keys(songData).length !== 0; 
+  // let allTracks;
 
-  if (songDataExists) {
+  // if (songDataExists) {
 
-    allTracks = songData.data[0].tracks.items;
+  //   allTracks = songData.data[0].tracks.items;
     
-    songData0 = {
-      artist: allTracks[0].artists[0].name,
-      song: allTracks[0].name,
-      album: allTracks[0].album.name,
-      preview_url: allTracks[0].preview_url,
-      spotify_url: allTracks[0].external_urls.spotify
-    }
-  }
+  //   songData0 = {
+  //     artist: allTracks[0].artists[0].name,
+  //     song: allTracks[0].name,
+  //     album: allTracks[0].album.name,
+  //     preview_url: allTracks[0].preview_url,
+  //     spotify_url: allTracks[0].external_urls.spotify
+  //   }
+  // }
 
   const exampleThreeSongs = exampleData.data[0].tracks.items.slice(0, 3);
-
-  console.log(exampleThreeSongs);
 
   return (
     <>
