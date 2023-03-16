@@ -6,8 +6,6 @@ import FileUploadForm from "./FileUploadForm";
 import Results from "./Results";
 import Footer from "./Footer";
 
-
-
 export default function App() {
   let reader = new FileReader();
 
