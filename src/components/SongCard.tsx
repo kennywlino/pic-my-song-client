@@ -6,6 +6,7 @@ export default function SongCard(props: { data : any }) {
   const album = data.album.name;
   const albumArt = data.album.images[0].url;
   const previewUrl = data.preview_url;
+  const spotifyUrl = data.external_urls.spotify;
 
   return (
     <div className="card card-side h-36 bg-base-100 shadow-xl">
@@ -16,7 +17,7 @@ export default function SongCard(props: { data : any }) {
         <p>{album}</p>
       </div>
       <div className="card-actions self-center pr-4">
-        <button className="btn" onClick={() => window.open(previewUrl
+        <button className="btn" onClick={() => window.open(spotifyUrl
           )}>Play</button>
       </div>
     </div>
