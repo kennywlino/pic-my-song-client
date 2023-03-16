@@ -5,8 +5,6 @@ import { ReactComponent as Photo } from '../assets/photo-1263856.svg';
 
 const SERVER = import.meta.env.VITE_SERVER;
 
-console.log("This is server: ", SERVER);
-
 const fileHandler = (e: ChangeEvent<HTMLInputElement>, setSongData: Function, setImage: Function): void => {
   e.preventDefault();
   if (e.target.files == null) {
