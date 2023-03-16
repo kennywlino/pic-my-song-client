@@ -14,7 +14,7 @@ export default function Results(props: { songData : songDataObject, image: strin
   let songDataExists = Object.keys(songData).length !== 0; 
   let allTracks;
 
-  if (songDataExists) {
+  if (songDataExists && songData.data) {
     allTracks = songData.data[0].tracks.items.slice(0, 3);
   }
   // const exampleThreeSongs = exampleData.data[0].tracks.items.slice(0, 3);
@@ -38,7 +38,7 @@ export default function Results(props: { songData : songDataObject, image: strin
           <div className="flex flex-col gap-6">
 
           { songDataExists && 
-            allTracks.map(track => <SongCard data={track} />)
+            allTracks.map((track: any) => <SongCard data={track} />)
           }
 
           {/* {
