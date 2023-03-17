@@ -1,3 +1,6 @@
+import { ReactComponent as SpotifyIcon } from '../assets/spotify.svg';
+import { ReactComponent as YouTubeIcon } from '../assets/youtube.svg';
+
 export default function SongCard(props: { data : any }) {
   const { data } = props;
 
@@ -11,14 +14,22 @@ export default function SongCard(props: { data : any }) {
   return (
     <div className="card card-side h-36 bg-base-100 shadow-xl">
       <figure className="basis-36"><img src={albumArt} alt="" className="h-40" /></figure>
-      <div className="card-body w-64">
-        <p>{artist}</p>
-        <p>{song}</p>
-        <p>{album}</p>
+      <div className="card-body w-32 lg:w-80">
+        <div>
+          <p className="font-bold">{artist}</p>
+          <p>{song}</p>
+          <p>{album}</p>
+        </div>
       </div>
-      <div className="card-actions self-center pr-4">
-        <button className="btn" onClick={() => window.open(spotifyUrl
-          )}>Play</button>
+      <div className="card-actions flex-col p-4 self-center gap-4">
+        <button onClick={() => window.open(spotifyUrl
+          )}>
+            <SpotifyIcon className="w-10 h-10" />
+        </button>
+        <button>
+            <YouTubeIcon className="w-10 h-10" />
+        </button>
+        
       </div>
     </div>
     )
