@@ -26,7 +26,7 @@ export default function SongCard(props: { data : any }) {
           )}>
             <SpotifyIcon className="w-10 h-10" />
         </button>
-        <button>
+        <button onClick={() => window.open(`https://www.youtube.com/results?search_query=${artist}+${song}`)}>
             <YouTubeIcon className="w-10 h-10" />
         </button>
         

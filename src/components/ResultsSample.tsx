@@ -10,14 +10,6 @@ interface songDataObject {
 export default function Results(props: { songData : songDataObject, image: string }) {
   const { songData, image } = props;
 
-
-  let songDataExists = Object.keys(songData).length !== 0; 
-  let allTracks;
-
-  if (songDataExists && songData.data) {
-    allTracks = songData.data[0].tracks.items.slice(0, 3);
-  }
-
   const exampleThreeSongs = exampleData.data[0].tracks.items.slice(0, 3);
 
   return (
@@ -27,20 +19,16 @@ export default function Results(props: { songData : songDataObject, image: strin
 
         <div className="flex flex-col gap-20 lg:flex-row lg:gap-0 justify-around items-center">
 
-
           <div className="card">
-            <figure>{image && <img src={image} alt="test" className="h-96 rounded-lg hover:scale-110"/>}</figure>
+            <figure>{<img src={capybara} alt="test" className="h-96 rounded-lg hover:scale-110"/>}</figure>
           </div>
 
           <div className="flex flex-col gap-6">
-
-          {songDataExists && 
-            allTracks.map((track: any) => <SongCard data={track} />)
+          {
+            exampleThreeSongs.map(track => <SongCard data={track} />)
           }
-          
           </div>
-        </div>
-      </div>
+        </div>      </div>
     </>
   )
 }
