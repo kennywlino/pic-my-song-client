@@ -57,11 +57,12 @@ export default function FileUploadForm(props: { setSongData: Function, setImage:
           {isServerRunning ? 
             <div className="alert alert-success mt-4">Server online</div> 
             :
-            <div className="alert alert-error">Server offline</div> 
+            <div className="alert alert-error mt-4">Server offline. Please wait about 10 seconds.</div>
           }
         </div>
         <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e, props.setSongData, props.setImage)}/>
       </label>
     </div>
+    
   )
 }
