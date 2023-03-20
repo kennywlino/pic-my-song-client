@@ -39,11 +39,19 @@ const fileHandler = (e: ChangeEvent<HTMLInputElement>, setSongData: Function, se
 
 export default function FileUploadForm(props: { setSongData: Function, setImage: Function }) {
   const [isServerRunning, setIsServerRunning] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     axios.get(`${SERVER}`)
-      .then(response => setIsServerRunning(true))
-      .catch(error => console.error(error));
+      .then(response => {
+        setIsServerRunning(true);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        setError(error);
+        setIsLoading(false);
+      });
   }, []);
 
 
@@ -54,10 +62,13 @@ export default function FileUploadForm(props: { setSongData: Function, setImage:
         <Photo className="h-20 w-20 fill-white" />
           <p className="my-2 text-xl"><span className="font-semibold">Click to upload</span> or drag and drop</p>
           <p className="text-lg">JPG or PNG files</p>
-          {isServerRunning ? 
+          {isServerRunning && !isLoading ? 
             <div className="alert alert-success mt-4">Server online</div> 
             :
-            <div className="alert alert-error mt-4">Server offline. Please wait about 10 seconds.</div>
+            !isServerRunning && isLoading ?
+            <div className="alert alert-warning mt-4">Server loading...</div>
+            :
+            <div className="alert alert-error mt-4">Server error: {error}</div>
           }
         </div>
         <input type="file" id="image_upload" className="hidden" onChange={(e) => fileHandler(e, props.setSongData, props.setImage)}/>
