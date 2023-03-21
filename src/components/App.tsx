@@ -4,6 +4,7 @@ import Header from "./Header";
 import Hero from "./Hero";
 import FileUploadForm from "./FileUploadForm";
 import Results from "./Results";
+import ResultsSample from "./ResultsSample";
 import Footer from "./Footer";
 
 export default function App() {
