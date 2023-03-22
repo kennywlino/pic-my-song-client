@@ -1,13 +1,10 @@
 import SongCard from "./SongCard";
 import capybara from '../assets/capybara.jpg'
 import exampleData from "../../spotify-songs-search-example.json";
+import { RefObject } from "react";
 
-
-interface songDataObject {
-  data?: Array<any>;
-}
-
-export default function Results() {
+export default function Results(props: { audioRef: RefObject<HTMLAudioElement>, isPlaying: boolean, setIsPlaying: Function }) {
+  const { audioRef, isPlaying, setIsPlaying } = props;
   const exampleThreeSongs = exampleData.data[0].tracks.items.slice(0, 3);
 
   return (
@@ -20,8 +17,14 @@ export default function Results() {
           </div>
           <div className="basis-1/2 flex flex-col gap-6">
           {
-            exampleThreeSongs.map(track => <SongCard data={track} />)
-          }
+            exampleThreeSongs.map((track, idx) => 
+              <SongCard 
+                key={idx} 
+                data={track} 
+                audioRef={audioRef} 
+                isPlaying={isPlaying} 
+                setIsPlaying={setIsPlaying}/>
+              )}
           </div>
         </div>      
       </div>

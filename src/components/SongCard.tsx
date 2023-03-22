@@ -1,9 +1,10 @@
+import { RefObject } from 'react';
 import { ReactComponent as PlayIcon } from '../assets/noun-play-1713294.svg';
 import { ReactComponent as SpotifyIcon } from '../assets/spotify.svg';
 import { ReactComponent as YouTubeIcon } from '../assets/youtube.svg';
 
-export default function SongCard(props: { data : any }) {
-  const { data } = props;
+export default function SongCard(props: { data : any, audioRef: RefObject<HTMLAudioElement>, isPlaying: boolean, setIsPlaying: Function }) {
+  const { data, audioRef, isPlaying, setIsPlaying } = props;
 
   const artist = data.artists[0].name;
   const song = data.name;
@@ -12,17 +13,41 @@ export default function SongCard(props: { data : any }) {
   const previewUrl = data.preview_url;
   const spotifyUrl = data.external_urls.spotify;
 
+  function handlePreviewClick() {
+    const currentTrack = audioRef.current?.src;
+
+    if (currentTrack === previewUrl) {
+      togglePlayback();
+    } else {
+      if(audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = previewUrl;
+        audioRef.current.load();
+        audioRef.current.play();
+      }
+    }
+  }
+
+  function togglePlayback() {
+    const nextIsPlaying = !isPlaying;
+    setIsPlaying(nextIsPlaying);
+
+    if (nextIsPlaying) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }  
+  }
+
   return (
     <div className="card card-side h-36 bg-base-100 shadow-xl">
-      <figure className="basis-36 hover:scale-110">
-        <a href={previewUrl}>
+      <figure className="basis-36 hover:scale-110 cursor-pointer" onClick={() => handlePreviewClick()}>
         <div className="relative">
             <img src={albumArt} className="w-full h-full object-cover" alt="album" />
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <PlayIcon fill="white" className="col-span-1 h-40 w-40 opacity-0 hover:opacity-75" />
             </div>
           </div>
-        </a>
       </figure>
       <div className="card-body w-32 lg:w-80">
         <div>
